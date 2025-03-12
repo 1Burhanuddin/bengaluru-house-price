@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h2 class="mb-4">Model Profile</h2>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h4>Linear Regression Model</h4>
+                <ul class="list-unstyled">
+                    <li>R² Score: {{ lr_score }}</li>
+                    <li>Mean Absolute Error: {{ lr_mae }}</li>
+                    <li>Mean Squared Error: {{ lr_mse }}</li>
+                </ul>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <h4>Random Forest Model</h4>
+                <ul class="list-unstyled">
+                    <li>R² Score: {{ rf_score }}</li>
+                    <li>Mean Absolute Error: {{ rf_mae }}</li>
+                    <li>Mean Squared Error: {{ rf_mse }}</li>
+                </ul>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <h4>Decision Tree Model</h4>
+                <ul class="list-unstyled">
+                    <li>R² Score: {{ dt_score }}</li>
+                    <li>Mean Absolute Error: {{ dt_mae }}</li>
+                    <li>Mean Squared Error: {{ dt_mse }}</li>
+                </ul>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <h4>Support Vector Regression Model</h4>
+                <ul class="list-unstyled">
+                    <li>R² Score: {{ svr_score }}</li>
+                    <li>Mean Absolute Error: {{ svr_mae }}</li>
+                    <li>Mean Squared Error: {{ svr_mse }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <h4 class="mt-4">Dataset Information</h4>
+        <ul>
+            <li>Total Records: {{ total_records }}</li>
+            <li>Features Used: {{ features|join(', ') }}</li>
+            <li>Number of Locations: {{ num_locations }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Predict House Price</h2>
+                <div class="text-center mb-4">
+                    <button onclick="fillDemoData()" class="btn btn-outline-dark">Fill Demo Data</button>
+                </div>
+                <form method="POST" action="{{ url_for('predict') }}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Location:</label>
+                                <select class="form-select" name="location" id="location" required>
+                                    <option value="other">Other</option>
+                                    {% for location in locations %}
+                                    <option value="{{ location }}">{{ location }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="sqft" class="form-label">Total Square Feet:</label>
+                                <input type="number" class="form-control" name="sqft" id="sqft" required min="100">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="bath" class="form-label">Number of Bathrooms:</label>
+                                <input type="number" class="form-control" name="bath" id="bath" required min="1">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="bhk" class="form-label">Number of BHK:</label>
+                                <input type="number" class="form-control" name="bhk" id="bhk" required min="1">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="model" class="form-label">Select Model:</label>
+                                <select class="form-select" name="model" id="model" required>
+                                    <option value="linear">Linear Regression</option>
+                                    <option value="random_forest">Random Forest</option>
+                                    <option value="decision_tree">Decision Tree</option>
+                                    <option value="svr">Support Vector Regression</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark w-100">Predict Price</button>
+                        </div>
+                    </div>
+                </form>
+
+                {% if prediction %}
+                <div class="mt-4 text-center">
+                    <h3>Predicted Price</h3>
+                    <p class="lead">₹ {{ prediction }} Lakhs</p>
+                    <p class="text-muted">Using {{ model_name }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function fillDemoData() {
+    document.getElementById('location').value = 'Whitefield';
+    document.getElementById('sqft').value = '1500';
+    document.getElementById('bath').value = '2';
+    document.getElementById('bhk').value = '3';
+    document.getElementById('model').value = 'random_forest';
+}
+</script>
+{% endblock %}

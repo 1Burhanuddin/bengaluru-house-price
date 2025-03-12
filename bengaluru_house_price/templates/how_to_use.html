@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}How to Use{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h2 class="mb-4">How to Use the Price Predictor</h2>
+        
+        <h4>Step-by-Step Guide</h4>
+        <ol class="mb-4">
+            <li>Select the location of the property</li>
+            <li>Enter the total square feet area</li>
+            <li>Specify the number of bathrooms</li>
+            <li>Enter the number of BHK (Bedroom, Hall, Kitchen)</li>
+            <li>Choose your preferred prediction model:
+                <ul class="mt-2">
+                    <li><strong>Linear Regression:</strong> Simple and interpretable</li>
+                    <li><strong>Random Forest:</strong> High accuracy, good for complex patterns</li>
+                    <li><strong>Decision Tree:</strong> Easy to understand, handles non-linear relationships</li>
+                    <li><strong>Support Vector Regression:</strong> Good for handling outliers</li>
+                </ul>
+            </li>
+            <li>Click "Predict Price" to get the estimated price</li>
+        </ol>
+
+        <h4>Demo Examples</h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Square Feet</th>
+                        <th>Bathrooms</th>
+                        <th>BHK</th>
+                        <th>Predicted Price (₹ Lakhs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for example in examples %}
+                    <tr>
+                        <td>{{ example.location }}</td>
+                        <td>{{ example.sqft }}</td>
+                        <td>{{ example.bath }}</td>
+                        <td>{{ example.bhk }}</td>
+                        <td>{{ example.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
